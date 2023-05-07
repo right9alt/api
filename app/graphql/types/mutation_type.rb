@@ -13,6 +13,9 @@ module Types
     field :sign_up, mutation: Mutations::Auth::SignUpMutation
     field :sign_out, mutation: Mutations::Auth::SignOutMutation
     field :reset_password, mutation: Mutations::Auth::ResetPasswordMutation
+    #User
+    field :like, mutation: Mutations::Users::LikeMutation
+    field :follow, mutation: Mutations::Users::FollowMutation
     
   end
 end

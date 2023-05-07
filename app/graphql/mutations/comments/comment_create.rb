@@ -16,7 +16,7 @@ module Mutations
         post = Post.find(post_id)
         comment = post.comments.new(user_id: context[:current_user].id,
                                     parent_id: parent_id, body: body)
-        if post.save
+        if comment.save
           { comment: comment}
         else
           { errors: comment.errors.full_messages }

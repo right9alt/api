@@ -10,11 +10,11 @@ module Types
     def current_user
       context[:current_user]
     end
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+   
+    field :all_posts, [Types::PostType],  "Returns all posts", null: true
+    def all_posts
+      Post.all
     end
+  
   end
 end
