@@ -15,6 +15,14 @@ module Types
     def all_posts
       Post.all
     end
-  
+
+    field :selected_user_posts, [Types::PostType],  "Returns selected user posts", null: true do
+      argument :id, ID
+    end
+    
+    def selected_user_posts(id:)
+      User.find(id).posts
+    end
+
   end
 end
