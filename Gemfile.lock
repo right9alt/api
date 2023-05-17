@@ -151,6 +151,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redis (4.8.1)
     reline (0.3.3)
       io-console (~> 0.5)
     sprockets (4.2.0)
@@ -184,6 +185,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.3)
+  redis (~> 4.0)
   tzinfo-data
 
 RUBY VERSION
