@@ -10,12 +10,15 @@ module Mutations
       field :errors, [String], null: true
 
       def resolve(body:, file: nil)
-        post = context[:current_user].posts.new(body: body)
-
         if file
-          # Сохранение файла с использованием Active Storage
-          post.image.attach(file)
+          blob = ActiveStorage::Blob.create_and_upload!(
+            io: file,
+            filename: file.original_filename,
+            content_type: file.content_type
+          )    
         end
+        post = context[:current_user].posts.new(body: body, image: blob)
+
 
         if post.save
           ApiSchema.subscriptions.trigger(:post_created, {}, post)

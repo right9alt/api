@@ -1,3 +1,5 @@
+include(Rails.application.routes.url_helpers)
+
 module Types
   class PostType < Types::BaseObject
     field :id, ID, null: false
@@ -13,7 +15,9 @@ module Types
     end
 
     def image_url
-      object.image.attached? ? url_for(object.image) : nil
+      if object.image.present?
+        rails_blob_path(object.image, only_path: true)
+      end
     end
   end
 end
