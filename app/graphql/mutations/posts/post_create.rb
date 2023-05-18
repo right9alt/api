@@ -14,9 +14,7 @@ module Mutations
 
         post = context[:current_user].posts.new(body: body)
         if post.save
-          post.tap do |post|
-            ApiSchema.subscriptions.trigger(:post_created, {}, post)
-          end
+          ApiSchema.subscriptions.trigger(:post_created, {}, post)
           { post: post}
         else
           { errors: post.errors.full_messages }
