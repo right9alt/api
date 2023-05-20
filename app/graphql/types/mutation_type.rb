@@ -18,5 +18,8 @@ module Types
     field :follow, mutation: Mutations::Users::FollowMutation
     field :update_avatar, mutation: Mutations::Users::UpdateAvatarMutation
     field :update_profile_header, mutation: Mutations::Users::UpdateProfileHeaderMutation
+    #Rooms
+    field :room_create, mutation: Mutations::Rooms::RoomCreate
+    field :message_create, mutation: Mutations::Rooms::MessageCreate
   end
 end

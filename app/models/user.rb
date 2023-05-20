@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :likeables, dependent: :destroy
   has_many :liked_posts, through: :likeables, source: :likeable, source_type: 'Post'
   has_many :liked_comments, through: :likeables, source: :likeable, source_type: 'Comment'
+  has_many :messages, dependent: :destroy
+  has_many :room_members, dependent: :destroy
   #Followers
   has_many :following_users,
   foreign_key: :followee_id,
