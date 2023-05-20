@@ -16,6 +16,7 @@ module Types
     #User
     field :like, mutation: Mutations::Users::LikeMutation
     field :follow, mutation: Mutations::Users::FollowMutation
-    
+    field :update_avatar, mutation: Mutations::Users::UpdateAvatarMutation
+    field :update_profile_header, mutation: Mutations::Users::UpdateProfileHeaderMutation
   end
 end

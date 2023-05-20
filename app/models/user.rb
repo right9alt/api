@@ -21,7 +21,9 @@ class User < ApplicationRecord
   dependent: :destroy
   has_many :followees, through: :followed_users, dependent: :destroy
 
-
+  has_one_attached :avatar
+  has_one_attached :profile_header
+  #validates
   validates :email, presence: true, uniqueness: true
 
 
