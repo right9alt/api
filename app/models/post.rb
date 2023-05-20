@@ -6,5 +6,5 @@ class Post < ApplicationRecord
   has_many :likeables, as: :likeable, dependent: :destroy
   has_many :likes, through: :likeables, source: :user
   
-  has_one_attached :image
+  has_many_attached :images
 end
