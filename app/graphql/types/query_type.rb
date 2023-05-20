@@ -31,6 +31,11 @@ module Types
       User.find(id).posts
     end
 
+    field :chat_rooms, [Types::RoomType], "Return all user rooms", null: true
+    def chat_rooms
+      context[:current_user].room_members.map {|rm| rm.room }
+    end
+
 
 
   end
