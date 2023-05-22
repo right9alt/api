@@ -11,7 +11,7 @@ module Mutations
       def resolve(post_id:)
         post = Post.find(post_id)
 
-        if context[:current_user].posts.include?(post)
+        if post_.user_id == context[:current_user].id
           if post.destroy
             { success: true}
           else

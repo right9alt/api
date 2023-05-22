@@ -23,6 +23,13 @@ module Types
       Post.all
     end
 
+    field :get_post, Types::PostType, 'Returns post by id', null: false do
+      argument :post_id, ID
+    end
+    def get_post(post_id:)
+      Post.find(post_id)
+    end
+
     field :selected_user_posts, [Types::PostType],  "Returns selected user posts", null: true do
       argument :id, ID
     end
@@ -36,6 +43,13 @@ module Types
       context[:current_user].room_members.map {|rm| rm.room }
     end
 
+    field :messages_for_room, [Types::MessageType],  "Returns selected room messages", null: true do
+      argument :room_id, ID
+    end
+
+    def messages_for_room(room_id:)
+      Room.find(room_id).messages
+    end
 
 
   end

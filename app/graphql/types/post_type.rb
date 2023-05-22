@@ -8,7 +8,7 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :comments, [Types::CommentType], null: true
-    field :image_urls, [String], null: true
+    field :image_urls, [Types::ImageType], null: true
 
     def comments
       object.comments.where(parent_id: nil)
@@ -17,7 +17,7 @@ module Types
     def image_urls
       object.images.map do |image|
         if image.present?
-          rails_blob_path(image, only_path: true)
+          { id: image.id, url: rails_blob_path(image, only_path: true) }
         end
       end
     end
