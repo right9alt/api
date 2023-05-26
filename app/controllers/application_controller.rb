@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  #before_action :authenticate, unless: -> { exempted_mutation? }
+  before_action :authenticate, unless: -> { exempted_mutation? }
   private
   
   def authenticate
