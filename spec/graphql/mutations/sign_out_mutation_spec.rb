@@ -20,12 +20,10 @@ RSpec.describe Mutations::Auth::SignOutMutation, type: :mutation do
           }
         }
         GQL
-
         result = ApiSchema.execute(query, context: context)
         data = result.dig('data', 'signOut')
 
         expect(data.dig('success')).to eq(true)
-    
       end
     end
 
