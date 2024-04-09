@@ -4,6 +4,7 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
+
   def execute
     variables = prepare_variables(params[:variables])
     query = params[:query]
@@ -13,10 +14,11 @@ class GraphqlController < ApplicationController
       current_user: @current_user,
       decoded_token: @decoded_token
     }
-    result = ApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = ApiSchema.execute(query, variables:, context:, operation_name:)
     render json: result
   rescue StandardError => e
     raise e unless Rails.env.development?
+
     handle_error_in_development(e)
   end
 

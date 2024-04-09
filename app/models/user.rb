@@ -31,9 +31,9 @@ class User < ApplicationRecord
   #validates
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "должен быть валидным email адресом" }
   validates :bio, length: { maximum: 1000, message: "не может превышать 1000 символов" }, allow_nil: true, on: :update
-  validates :phone_number, format: { with: /\A\+7\d{10}\z/, message: "должен содержать только цифры" }, uniqueness: true,  allow_nil: true, on: :update
-  validates :tag, format: { with: /\A(?!\d+$)[a-zA-Z0-9]{1,24}\z/, message: "не может состоять только из цифр и должен содержать не более 24 символов" }, uniqueness: true, allow_nil: true, on: :update
-  validates :name, length: { maximum: 24, message: "не может превышать 24 символа" }, allow_nil: true, on: :update
+  validates :phone_number, format: { with: /\A\+7\d{10}\z/, message: "должен содержать только цифры" }, uniqueness: true,  allow_nil: true, on: :update, if: -> { phone_number_changed? }
+  validates :tag, format: { with: /\A(?!\d+$)[a-zA-Z0-9]{1,24}\z/, message: "не может состоять только из цифр и должен содержать не более 24 символов" }, uniqueness: true, allow_nil: true, on: :update, if: -> { tag_changed? }
+  validates :name, length: { maximum: 24, message: "не может превышать 24 символа" }, allow_nil: true, on: :update, if: -> { name_changed? }
   validates :role, presence: true
 
   PASSWORD_FORMAT = /\A
@@ -81,16 +81,20 @@ class User < ApplicationRecord
       end
     end
   end
+
   private
+
   def set_default_role
     self.role ||= :user
   end
-  #есть уязвимость надо переобдумать
+
+  # есть уязвимость надо переобдумать
   def set_default_tag
-    self.update_column(:tag, "#{self.id}")
+    update_column(:tag, id.to_s)
   end
 
   def pass_updating?
     password_digest_changed?
   end
+
 end

@@ -31,7 +31,7 @@ module Mutations
 
         if post.save
           ApiSchema.subscriptions.trigger(:post_created, {}, post)
-          { post: post }
+          { post: }
         else
           { errors: post.errors.full_messages }
         end
