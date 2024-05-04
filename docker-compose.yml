@@ -61,6 +61,11 @@ services:
       test: pg_isready -U postgres -h 127.0.0.1
       interval: 5s
 
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - '6379:6379'
+
 volumes:
   postgres:
   bundle:

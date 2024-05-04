@@ -1,6 +1,6 @@
 module Types
   class SubscriptionType < BaseObject
-    field :post_created, Types::PostType, null: false
+    field :post_created, Types::PostType, null: true # was null: false, for frontend
     field :message_added_to_room, Types::MessageType, null: false do
       argument :room_id, ID, required: true
     end
